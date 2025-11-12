@@ -4,10 +4,12 @@ SMODS.Challenge {
     key = "cardless",
     rules = {
         custom = {
-            {id = "no_cards", value = true}
+            {id = "no_cards", value = true},
+            {id = "zero_card", value = nil},
+            {id = "win_ante", value = 10}
         },
         modifiers =  {
-            {id = "hand_size", value = 0}
+            {id = "hand_size", value = 0},
         },
     },
     jokers = {
@@ -124,10 +126,14 @@ SMODS.Challenge {
             { id = "c_strength"},
             { id = "c_star"},
             { id = "c_moon"},
+            { id = "c_chariot"},
+            { id = "c_death"},
             { id = "c_magician"},
             { id = "c_lovers"},
             { id = "c_justice"},
             { id = "c_heirophant"},
+            { id = "c_empress"},
+            { id = "c_devil"},
             { id = "c_hanged_man"},
             { id = "c_tower"},
             { id = "c_world"},
@@ -163,7 +169,10 @@ SMODS.Challenge {
             { id = "bl_eye", type = "blind" },
             { id = "bl_club", type = "blind" },
         }
-    }
+    },
+    apply = function()
+        G.GAME.win_ante = 10
+    end
 }
 
 local sel_blind = G.FUNCS.select_blind

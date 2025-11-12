@@ -297,7 +297,12 @@ return {
 		v_text = {
 			ch_c_no_cards = {
 				"All cards are destroyed when obtained"
-				 .. ((Cryptid and "") or "\nCan play a zero-card hand")
+			},
+			ch_c_zero_card = {
+				"Can play a zero-card hand"
+			},
+			ch_c_win_ante = {
+				"Set win ante to {C:attention}#1#"
 			}
 		}
 	}
