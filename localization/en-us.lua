@@ -281,7 +281,24 @@ return {
 		},
 		dictionary = {
 			b_pull = "PULL",
-			k_warehouse_retained = "Retained!"
+			k_warehouse_retained = "Retained!",
+		},
+		poker_hand_descriptions={
+			["warehouse_none"]={
+				"No cards",
+			},
+		},
+		poker_hands={
+			["warehouse_none"]="None",
+		},
+		challenge_names = {
+			c_warehouse_cardless = "Cardless"
+		},
+		v_text = {
+			ch_c_no_cards = {
+				"All cards are destroyed when obtained"
+				 .. ((Cryptid and "") or "\nCan play a zero-card hand")
+			}
 		}
 	}
 }
