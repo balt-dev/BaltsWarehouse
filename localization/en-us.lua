@@ -222,6 +222,17 @@ return {
                 },
             },
 		},
+		Planet = {
+            c_warehouse_nothing = {
+                name = "Nothing",
+                text = {
+                    "({V:1}lvl.#1#{}) Level up",
+                    "{C:attention}#2#",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                },
+            },
+		},
 		Joker = {
 			j_warehouse_sorcerer={
 				name="Sorcerer",
@@ -291,6 +302,7 @@ return {
 		dictionary = {
 			b_pull = "PULL",
 			k_warehouse_retained = "Retained!",
+			k_deep_space = "Deep Space"
 		},
 		poker_hand_descriptions={
 			["warehouse_none"]={
@@ -308,11 +320,14 @@ return {
 				"All cards are destroyed when obtained"
 			},
 			ch_c_zero_card = {
-				"Can play a zero-card hand"
+				"Will not lose with 0 cards in deck"
+			},
+			ch_c_start_shop_tag = {
+				"Start with a {C:attention}Shop Tag"
 			},
 			ch_c_win_ante = {
 				"Set win ante to {C:attention}#1#"
 			}
-		}
+		},
 	}
 }

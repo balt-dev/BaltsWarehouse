@@ -25,7 +25,7 @@ times = 1
 target = "functions/button_callbacks.lua"
 pattern = "if #G.hand.highlighted <= 0 or G.GAME.blind.block_play or #G.hand.highlighted > 5 then"
 position = "at"
-payload = '''if (#G.hand.highlighted <= 0 and not G.GAME.modifiers.no_cards) or G.GAME.blind.block_play or #G.hand.highlighted > 5 then'''
+payload = '''if G.GAME.blind.block_play or #G.hand.highlighted > 5 then'''
 match_indent = true
 times = 1
 
@@ -127,15 +127,23 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
-pattern = "if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 0 or #G.hand.highlighted > math.max(G.GAME.starting_params.discard_limit, 0) then"
+pattern = "if #G.hand.highlighted <= 0 or G.GAME.blind.block_play or #G.hand.highlighted > math.max(G.GAME.starting_params.play_limit, 1) then"
 position = "at"
-payload = "if not G.GAME.modifiers.no_cards and (G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 0 or #G.hand.highlighted > math.max(G.GAME.starting_params.discard_limit, 0)) then"
+payload = "if G.GAME.blind.block_play or #G.hand.highlighted > math.max(G.GAME.starting_params.play_limit, 1) then"
 match_indent = true
 
 [[patches]]
 [patches.pattern]
 target = "functions/button_callbacks.lua"
-pattern = "if #G.hand.highlighted <= 0 or G.GAME.blind.block_play or #G.hand.highlighted > math.max(G.GAME.starting_params.play_limit, 1) then"
+pattern = "if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted <= 0 or #G.hand.highlighted > math.max(G.GAME.starting_params.discard_limit, 0) then"
 position = "at"
-payload = "if (not G.GAME.modifiers.no_cards and #G.hand.highlighted <= 0) or G.GAME.blind.block_play or #G.hand.highlighted > math.max(G.GAME.starting_params.play_limit, 1) then"
+payload = "if G.GAME.current_round.discards_left <= 0 or #G.hand.highlighted > math.max(G.GAME.starting_params.discard_limit, 0) then"
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if highlighted_count > 0 then"
+position = "at"
+payload = "do"
 match_indent = true

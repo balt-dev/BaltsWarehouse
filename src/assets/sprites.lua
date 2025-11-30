@@ -41,10 +41,10 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-	key = "spectrals",
+	key = "consumables",
 	px = 71,
 	py = 95,
-	path = "spectrals.png"
+	path = "consumables.png"
 }
 
 SMODS.Atlas {

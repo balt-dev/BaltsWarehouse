@@ -1,7 +1,7 @@
 SMODS.Consumable {
 	key = "do_over",
 	set = "Spectral",
-	atlas = "warehouse_spectrals", pos = { x = 0, y = 0 },
+	atlas = "warehouse_consumables", pos = { x = 0, y = 0 },
 	config = { extra = { reset = 0, pull_from_packs = true } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.reset } }
@@ -84,7 +84,7 @@ SMODS.Consumable {
 SMODS.Consumable {
 	key = "hyperdrive",
 	set = "Spectral",
-	atlas = "warehouse_spectrals", pos = { x = 1, y = 0 },
+	atlas = "warehouse_consumables", pos = { x = 1, y = 0 },
 	config = { extra = { seal = 'warehouse_pink' }, max_highlighted = 1 },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_SEALS[card.ability.extra.seal]

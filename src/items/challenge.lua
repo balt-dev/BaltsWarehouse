@@ -6,17 +6,19 @@ SMODS.Challenge {
         custom = {
             {id = "no_cards", value = true},
             {id = "zero_card", value = nil},
+            {id = "start_shop_tag", value = nil},
         },
         modifiers =  {
             {id = "hand_size", value = 0},
+            {id = "dollars", value = 20},
         },
     },
-    jokers = {
-        { id = "j_ice_cream" }
+    tags = {
+        { id = "tag_warehouse_shop" }
     },
     consumeables = {
-        Cryptid and { id = "c_cry_nibiru" },
-        Cryptid and { id = "c_cry_nibiru" }
+        (Cryptid and { id = "c_cry_nibiru" }) or {id = "c_warehouse_nothing"},
+        (Cryptid and { id = "c_cry_nibiru" }) or {id = "c_warehouse_nothing"},
     },
     deck = {
         type = 'Challenge Deck',
@@ -45,7 +47,16 @@ SMODS.Challenge {
             { id = "bl_club", type = "blind" },
         }
     },
-    apply = function() end
+    apply = function()
+        G.E_MANAGER:add_event(Event{
+            trigger = "after",
+            delay = 0.5,
+            func = function()
+                add_tag(Tag('tag_warehouse_shop'))
+                return true
+            end
+        })
+    end
 }
 
 local sel_blind = G.FUNCS.select_blind
@@ -56,9 +67,7 @@ end
 
 local play_hl = G.FUNCS.play_cards_from_highlighted
 G.FUNCS.play_cards_from_highlighted = function(e)
-    if G.GAME.modifiers.no_cards then
-        G.hand:parse_highlighted()
-    end
+    G.hand:parse_highlighted()
     return play_hl(e)
 end
 
