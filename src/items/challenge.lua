@@ -6,6 +6,7 @@ SMODS.Challenge {
         custom = {
             {id = "no_cards", value = true},
             {id = "zero_card", value = nil},
+            {id = "win_ante", value = 10},
             {id = "start_shop_tag", value = nil},
         },
         modifiers =  {
@@ -48,6 +49,7 @@ SMODS.Challenge {
         }
     },
     apply = function()
+        G.GAME.win_ante = 10
         G.E_MANAGER:add_event(Event{
             trigger = "after",
             delay = 0.5,
