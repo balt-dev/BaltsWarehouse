@@ -6,6 +6,7 @@ return {
                 text={
                     "Played hand has a",
                     "temporary {C:attention}extra level{}",
+                    "when held in hand"
                 },
             }
 		},
@@ -210,6 +211,14 @@ return {
                     "Reshuffle the deck",
                     "Reset Hands and Discards",
                     "Set round score to {C:attention}#1#{}"
+                },
+            },
+            c_warehouse_apparition={
+                name="Apparition",
+                text={
+                    "Add {C:dark_edition}Negative{} to",
+                    "{C:attention}#1#{} random card",
+                    "in your {C:attention}full deck{}",
                 },
             },
 		},
