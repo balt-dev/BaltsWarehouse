@@ -161,7 +161,7 @@ SMODS.Consumable {
 		delay(0.3)
 	end,
 	can_use = function(self, card)
-		return check_all_selected_are_suit("Hearts")
+		return check_all_selected_are_suit("Spades")
 	end
 }
 SMODS.Consumable {
