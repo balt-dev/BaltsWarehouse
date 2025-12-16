@@ -318,3 +318,38 @@ SMODS.Consumable {
 		return G.jokers.highlighted[1] and G.jokers.highlighted[1].edition
 	end
 }
+
+SMODS.Consumable {
+	key = "i_judgement",
+	set = "Tarot",
+	pos = { x = 0, y = 2 },
+	loc_vars = function(self, info_queue, card)
+	end,
+	update = make_upside_down,
+	use = function(self, card, area)
+		local joker_to_reroll = G.jokers.highlighted[1]
+		local reroll_rarity = joker_to_reroll.config.center.rarity
+		if reroll_rarity == 1 then reroll_rarity = "Common"
+		elseif reroll_rarity == 2 then reroll_rarity = "Uncommon"
+		elseif reroll_rarity == 3 then reroll_rarity = "Rare"
+		elseif reroll_rarity == 4 then reroll_rarity = "Legendary"
+		end
+		SMODS.destroy_cards(G.jokers.highlighted, nil, nil, true)
+		delay(0.3)
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			func = function()
+				SMODS.add_card {
+					set = "Joker",
+					rarity = reroll_rarity,
+					key_append = "warehouse_i_judgement",
+					edition = joker_to_reroll.edition and joker_to_reroll.edition.key
+				}
+				return true
+			end
+		}))
+	end,
+	can_use = function(self, card)
+		return #G.jokers.highlighted == 1 and not SMODS.is_eternal(G.jokers.highlighted[1], {destroy_cards = true})
+	end
+}

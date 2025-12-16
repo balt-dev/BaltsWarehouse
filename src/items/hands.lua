@@ -7,7 +7,7 @@ if not Cryptid then
                 mult = 1, chips = 1, 
                 s_mult = 1,  s_chips = 1,
                 level = 1,
-                l_mult = 0.5, l_chips = 5,
+                l_mult = 1, l_chips = 7,
                 played = 0, played_this_round = 0,
                 example = {}
             }
@@ -17,8 +17,8 @@ if not Cryptid then
 
     SMODS.PokerHand {
         key = "none",
-        mult = 1, chips = 1,
-        l_mult = 0.5, l_chips = 3,
+        mult = 1, chips = 5,
+        l_mult = 1, l_chips = 5,
         example = {},
         evaluate = function(parts, hand)
             return { hand }

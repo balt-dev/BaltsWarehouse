@@ -195,6 +195,14 @@ return {
                     "{C:attention}Edition{} of #3# selected {C:attention}Joker{}",
                 },
             },
+            c_warehouse_i_judgement = {
+            		name = "Judgement?",
+            		text = {
+            			"{C:red}Destroys{} a selected {C:attention}Joker",
+            			"and creates a new one with the",
+            			"same {C:attention}rarity{} and {C:attention}Edition"
+            		}
+            }
 		},
 		Spectral = {
             c_warehouse_hyperdrive={
