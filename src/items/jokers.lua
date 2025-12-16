@@ -74,3 +74,25 @@ SMODS.Joker {
 		end
 	end
 }
+
+
+if not Cryptid then
+	SMODS.Joker {
+		key = "broken",
+		rarity = 1,
+		config = { t_chips = 30, type = 'warehouse_none' },
+		atlas = "warehouse_jokers", pos = {x = 1, y = 1},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands') } }
+		end
+	}
+	SMODS.Joker {
+		key = "missing",
+		rarity = 1,
+		config = { t_mult = 5, type = 'warehouse_none' },
+		atlas = "warehouse_jokers", pos = {x = 0, y = 1},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands') } }
+		end
+	}
+end

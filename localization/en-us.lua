@@ -273,7 +273,23 @@ return {
                     "Copies the ability",
                     "of the last sold {C:attention}Joker{}",
                 },
-			}
+			},
+            j_warehouse_broken={
+                name="Broken Joker",
+                text={
+                    "{C:chips}+#1#{} Chips if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                },
+            },
+            j_warehouse_missing={
+                name="Missing Joker",
+                text={
+                    "{C:red}+#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                },
+            },
 		},
 		Other = {
             warehouse_pink_seal={
