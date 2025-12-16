@@ -286,7 +286,7 @@ SMODS.Consumable {
 	key = "i_wheel",
 	set = "Tarot",
 	pos = { x = 0, y = 1 },
-	config = { extra = { chance_num = 1, chance_denom = 3 }, max_highlighted = 1 },
+	config = { extra = { chance_num = 4, chance_denom = 5 }, max_highlighted = 1 },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
