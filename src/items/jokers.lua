@@ -80,19 +80,43 @@ if not Cryptid then
 	SMODS.Joker {
 		key = "broken",
 		rarity = 1,
-		config = { t_chips = 30, type = 'warehouse_none' },
+		config = { chips = 75, type = 'warehouse_none' },
 		atlas = "warehouse_jokers", pos = {x = 1, y = 1},
 		loc_vars = function(self, info_queue, card)
-			return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands') } }
+			return { vars = { card.ability.chips, localize(card.ability.type, 'poker_hands') } }
+		end,
+		calculate = function(self, card, context)
+			if context.joker_main and context.scoring_name == card.ability.type then
+				return { chips = card.ability.chips }
+			end
 		end
 	}
 	SMODS.Joker {
 		key = "missing",
 		rarity = 1,
-		config = { t_mult = 5, type = 'warehouse_none' },
+		config = { mult = 10, type = 'warehouse_none' },
 		atlas = "warehouse_jokers", pos = {x = 0, y = 1},
 		loc_vars = function(self, info_queue, card)
-			return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands') } }
+			return { vars = { card.ability.mult, localize(card.ability.type, 'poker_hands') } }
+		end,
+		calculate = function(self, card, context)
+			if context.joker_main and context.scoring_name == card.ability.type then
+				return { mult = card.ability.mult }
+			end
+		end
+	}
+	SMODS.Joker {
+		key = "the_emptiness",
+		rarity = 3,
+		config = { h_x_mult = 3, type = 'warehouse_none' },
+		atlas = "warehouse_jokers", pos = {x = 2, y = 1},
+		loc_vars = function(self, info_queue, card)
+			return { vars = { card.ability.h_x_mult, localize(card.ability.type, 'poker_hands') } }
+		end,
+		calculate = function(self, card, context)
+			if context.joker_main and context.scoring_name == card.ability.type then
+				return { Xmult = card.ability.h_x_mult }
+			end
 		end
 	}
 end

@@ -278,16 +278,21 @@ return {
                 name="Broken Joker",
                 text={
                     "{C:chips}+#1#{} Chips if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
+                    "hand is a {C:attention}#2#",
                 },
             },
             j_warehouse_missing={
                 name="Missing Joker",
                 text={
                     "{C:red}+#1#{} Mult if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
+                    "hand is a {C:attention}#2#",
+                },
+            },
+            j_warehouse_the_emptiness={
+                name="The Emptiness",
+                text={
+                    "{X:red,C:white}X#1#{} Mult if played",
+                    "hand is a {C:attention}#2#",
                 },
             },
 		},
