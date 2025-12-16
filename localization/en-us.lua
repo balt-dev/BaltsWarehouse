@@ -37,14 +37,14 @@ return {
 			v_warehouse_theres_options = {
 				name = "There's Options",
 				text = {
-					"{C:attention}+#1#{} choice in each",
+					"{C:attention}+#1#{} option in each",
 					"{C:tarot}#2#{} or {C:planet}#3#{}"
 				}
 			},
 			v_warehouse_more_options = {
 				name = "More Options",
 				text = {
-					"{C:attention}+#1#{} choice in each",
+					"{C:attention}+#1#{} option in each",
 					"Booster Pack not covered by",
 					"{C:attention}There's Options",
 				}
