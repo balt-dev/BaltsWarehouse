@@ -1,46 +1,4 @@
 SMODS.Consumable {
-	key = "do_over",
-	set = "Spectral",
-	atlas = "warehouse_consumables", pos = { x = 0, y = 0 },
-	config = { extra = { reset = 0, pull_from_packs = true } },
-	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.reset } }
-	end,
-	use = function(self, card, area)
-		ease_discard(G.GAME.round_resets.discards - G.GAME.current_round.discards_left)
-		ease_hands_played(G.GAME.round_resets.hands - G.GAME.current_round.hands_left)
-
-		G.E_MANAGER:add_event(Event({
-			trigger = 'ease',
-			blocking = false,
-			ref_table = G.GAME,
-			ref_value = 'chips',
-			ease_to = 0,
-			delay = 0.5,
-			func = (function(t) return math.floor(t) end)
-		}))
-		G.FUNCS.draw_from_hand_to_discard()
-		G.FUNCS.draw_from_discard_to_deck()
-		G.E_MANAGER:add_event(Event({
-			trigger = 'immediate',
-			blocking = false,
-			func = (
-				function()
-					if #G.deck.cards < G.deck.config.card_limit then return false end
-					G.deck:shuffle('doover_'..card.unique_val)
-                    G.deck:hard_set_T()
-					G.FUNCS.draw_from_deck_to_hand()
-
-					return true
-				end)
-		}))
-	end,
-	can_use = function(self, card)
-		return G.STATE == G.STATES.SELECTING_HAND
-	end
-}
-
-SMODS.Consumable {
 	key = "apparition",
 	set = "Spectral",
 	pos = { x = 5, y = 2 }, --atlas = "warehouse_spectrals", 

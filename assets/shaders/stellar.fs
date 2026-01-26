@@ -14,6 +14,10 @@ extern bool shadow;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_1;
 extern MY_HIGHP_OR_MEDIUMP vec4 burn_colour_2;
 
+extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;
+extern MY_HIGHP_OR_MEDIUMP float hovering;
+extern MY_HIGHP_OR_MEDIUMP float screen_scale;
+
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
 {
     if (dissolve < 0.001) {
@@ -99,20 +103,33 @@ float rand2(vec2 co){
     return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+float starfield(vec2 uv, float density) {
+    vec2 grid_uv = floor(uv / density);
+    vec2 local_uv = fract(uv / density) - 0.5;
+    vec2 offset = vec2(rand2(grid_uv), rand2(grid_uv + 100.0)) - 0.5;
+    float dist = length(local_uv - offset);
+    float star = step(1.0, 0.09 / dist); 
+    return max(0.0, star * step(0.1, rand2(grid_uv)));
+}
+
+float pcos(float val) {
+	return (1.0 + cos(val)) * 0.5;
+}
+
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     vec4 tex = Texel( texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
     // Put stuff here!
-    tex.rgb *= vec3(0.7, 0.5, 1.0) + stellar.rgg * 0.000001;
+    tex.rgb *= vec3(0.65, 0.6, 0.75);
+    float add = 0.62 * sin(stellar.r * 2.0 - 0.3) * (sin(0.7 - uv.r * uv.g * uv.g) - 0.1 * cos(stellar.g * 0.3));
+	add += starfield(floor(texture_coords * image_details) + vec2(stellar.r * 2.3 + stellar.g * 0.01, stellar.r * -6.2 + stellar.g * 0.02), 6.0) * (0.4 + 0.7 * pcos(stellar.r) * (pcos(0.5 - uv.r * uv.r * uv.g) + 0.03 * pcos(stellar.g * 0.3)));
+	add = pow(max(add, 0.0), 1.3);
+    tex.rgb += vec3(add, add, add) * vec3(0.8, 0.8, 1.0);
 
     return dissolve_mask(tex, texture_coords, uv);
 }
-
-extern MY_HIGHP_OR_MEDIUMP vec2 mouse_screen_pos;
-extern MY_HIGHP_OR_MEDIUMP float hovering;
-extern MY_HIGHP_OR_MEDIUMP float screen_scale;
 
 #ifdef VERTEX
 vec4 position( mat4 transform_projection, vec4 vertex_position )

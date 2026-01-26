@@ -1,0 +1,56 @@
+[manifest]
+version = "1.0.0"
+priority = -2147483648
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+for i=1, #G.jokers.cards do
+    --calculate the joker effects
+    local effects = eval_card(G.jokers.cards[i], {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, before = true})
+    if effects.jokers then
+        card_eval_status_text(G.jokers.cards[i], 'jokers', nil, percent, nil, effects.jokers)
+        percent = percent + percent_delta
+        if effects.jokers.level_up then
+            level_up_hand(G.jokers.cards[i], text)
+        end
+    end
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.current_round and G.GAME.current_round.stellar_levels then
+    SMODS.smart_level_up_hand(nil, text, true, G.GAME.current_round.stellar_levels)
+    update_hand_text({sound = 'tarot1', volume = 1, pitch = 1, delay = 0}, {level=G.GAME.hands[text].level, chips = G.GAME.hands[text].chips, mult = G.GAME.hands[text].mult, StatusText = true})
+end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+for i=1, #G.jokers.cards do
+    --calculate the joker after hand played effects
+    local effects = eval_card(G.jokers.cards[i], {cardarea = G.jokers, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})
+    if effects.jokers then
+        card_eval_status_text(G.jokers.cards[i], 'jokers', nil, percent, nil, effects.jokers)
+        percent = percent + percent_delta
+    end
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.current_round and G.GAME.current_round.stellar_levels then
+    update_hand_text({delay = 1}, {handname = localize(text, 'poker_hands'), level=G.GAME.hands[text].level, chips = G.GAME.hands[text].chips, mult = G.GAME.hands[text].mult})
+    SMODS.smart_level_up_hand(nil, text, true, -G.GAME.current_round.stellar_levels)
+    update_hand_text({sound = 'tarot1', volume = 1, pitch = 1, delay = 1}, {level=G.GAME.hands[text].level, chips = G.GAME.hands[text].chips, mult = G.GAME.hands[text].mult, StatusText = true})
+    delay(2.5)
+    update_hand_text({sound = 'button', delay = 1.5}, {level = '', chips = '', mult = '', handname = ''})
+    G.GAME.current_round.stellar_levels = nil
+end
+'''
+match_indent = true
+times = 1

@@ -1,0 +1,25 @@
+[manifest]
+version = "1.0.0"
+priority = -2147483648
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+        loc_vars = { playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour,
+                    nominal_chips = self.base.nominal > 0 and self.base.nominal or nil,
+                    bonus_chips = (self.ability.bonus + (self.ability.perma_bonus or 0)) > 0 and (self.ability.bonus + (self.ability.perma_bonus or 0)) or nil,
+                }
+'''
+position = "after"
+payload = '''
+    if self.ability.warehouse_blank then
+        loc_vars.playing_card = nil
+        loc_vars.nominal_chips = nil
+        loc_vars.value = nil
+        loc_vars.suit = nil
+        loc_vars.colour = nil
+    end
+'''
+match_indent = true
+times = 1

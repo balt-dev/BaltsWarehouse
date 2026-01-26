@@ -6,7 +6,6 @@ return {
                 text={
                     "Played hand has a",
                     "temporary {C:attention}extra level{}",
-                    "when held in hand"
                 },
             }
 		},
@@ -295,6 +294,23 @@ return {
                     "hand is a {C:attention}#2#",
                 },
             },
+			j_warehouse_grater={
+				name="Cheese Grater",
+                text = {
+                    "Each {C:attention}3{} or {C:attention}6",
+                    "{C:attention}held in hand{}",
+                    "gives {C:mult}+#1#{} Mult",
+                },
+			},
+			j_warehouse_golden_pearl={
+				name="Golden Pearl",
+                text = {
+                    "When playing a {C:attention}High Card{}",
+                    "with only a {C:attention}King{} and {C:attention}Queen{},",
+                    "{C:red}destroy{} the Queen and give",
+                    "the King {C:mult}+#1#{} bonus Mult",
+                },
+			},
 		},
 		Other = {
             warehouse_pink_seal={
@@ -302,12 +318,6 @@ return {
                 text={
                     "Balances {C:attention}#1#%{} of {C:blue}Chips{} and {C:red}Mult{}",
                 },
-            },
-            warehouse_blank_card={
-            	name="Blank Card",
-            	text={
-            		"Copies suit and rank of card to the {C:attention}right{}"
-            	}
             },
             warehouse_todo={
             	name="TODO",
@@ -321,12 +331,22 @@ return {
             		"This addition uses placeholder assets",
             		"that are subject to change."
             	}
-            }
+            },
+            warehouse_blank={
+            	name="Blank",
+            	text={
+            		"Copies suit and",
+            		"rank of card",
+            		"to the {C:attention}right{}"
+            	}
+            },
 		},
 	},
 	misc={
 		labels = {
-			warehouse_pink_seal="Pink Seal"
+			warehouse_pink_seal="Pink Seal",
+            warehouse_blank = "Blank",
+            warehouse_stellar="Stellar",
 		},
 		dictionary = {
 			b_pull = "PULL",

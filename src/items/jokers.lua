@@ -75,6 +75,61 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Joker {
+	key = "grater",
+	rarity = 2,
+	pos = {x = 0, y = 0},
+    config = { extra = { mult = 21 } },
+    loc_vars = function(self, info_queue, card)
+		table.insert(info_queue, { set = "Other", key = "warehouse_placeholder" })
+        return { vars = { card.ability.extra.mult } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.hand and not context.end_of_round and
+            (context.other_card:get_id() == 3 or context.other_card:get_id() == 6) then
+            return {
+                mult = card.ability.extra.mult
+            }
+        end
+    end
+}
+
+SMODS.Joker {
+	key = "golden_pearl",
+	rarity = 3,
+	pos = {x = 0, y = 0},
+    config = { extra = 10 },
+    loc_vars = function(self, info_queue, card)
+		table.insert(info_queue, { set = "Other", key = "warehouse_placeholder" })
+        return { vars = { card.ability.extra } }
+    end,
+    calculate = function(self, card, context)
+        if
+    		context.before and
+    		context.scoring_name == 'High Card' and
+    		#context.full_hand == 2
+		then
+			local king, queen = nil, nil
+			for i, card in ipairs(G.play.cards) do
+				if card:get_id() == 13 and not king then
+					king = card
+				end
+				if card:get_id() == 12 and not queen then
+					queen = card
+				end
+			end
+			if king and queen then
+				SMODS.destroy_cards(queen)
+	            king.ability.perma_mult = king.ability.perma_mult or 0
+	            king.ability.perma_mult = king.ability.perma_mult + card.ability.extra
+	            return {
+	                message = localize('k_upgrade_ex'), colour = G.C.MULT, message_card = king
+	            }
+			end
+        end
+    end
+}
+
 
 if not Cryptid then
 	SMODS.Joker {
